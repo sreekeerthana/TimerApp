@@ -10,28 +10,10 @@ npm i timer-application
 ## Usage
 ```html
 <script type="module">
-  import 'timer-application/textbox-component.js';
-</script>
-
-<textbox-component></textbox-component>
-
-<script type="module">
   import 'timer-application/button-component.js';
 </script>
 
 <button-component></button-component>
-
-<script type="module">
-  import 'timer-application/clock-timer-component.js';
-</script>
-
-<clock-timer-component></clock-timer-component>
-
-<script type="module">
-  import 'timer-application/main-application.js';
-</script>
-
-<main-application></main-application>
 ```
 
 ## Linting with ESLint, Prettier, and Types
