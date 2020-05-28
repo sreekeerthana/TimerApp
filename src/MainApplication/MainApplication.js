@@ -27,6 +27,17 @@ export class MainApplication extends LitElement {
     this.btn = 'CREATE';
   }
 
+  createTimer() {
+    this.timerName = this.shadowRoot.getElementById(
+      'timername'
+    ).serializedValue;
+    this.formValue = this.shadowRoot.getElementById('timerVal').serializedValue;
+    if (!(this.formValue < 0)) {
+      this.timerObj = { timerName: this.timerName, timerValue: this.formValue };
+      this.timerData.push(this.timerObj);
+    }
+  }
+  
   render() {
     return html`
       <div class="bgColor">
@@ -65,16 +76,5 @@ export class MainApplication extends LitElement {
         </ul>
       </div>
     `;
-  }
-
-  createTimer() {
-    this.timerName = this.shadowRoot.getElementById(
-      'timername'
-    ).serializedValue;
-    this.formValue = this.shadowRoot.getElementById('timerVal').serializedValue;
-    if (!(this.formValue < 0)) {
-      this.timerObj = { timerName: this.timerName, timerValue: this.formValue };
-      this.timerData.push(this.timerObj);
-    }
   }
 }
