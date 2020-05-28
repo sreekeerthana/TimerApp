@@ -1,85 +1,42 @@
-# \<timer-application>
-
 This webcomponent follows the [open-wc](https://github.com/open-wc/open-wc) recommendation.
 
-## Installation
-```bash
-npm i timer-application
-```
+# Timer
 
-## Usage
-```html
-<script type="module">
-  import 'timer-application/textbox-component.js';
-</script>
+## Textbox - component
 
-<textbox-component></textbox-component>
+In this storybook one Textbox(type as text and number) component is there which extends LionInput.
 
-<script type="module">
-  import 'timer-application/button-component.js';
-</script>
+## Button - component
 
-<button-component></button-component>
+In this storybook one Button component is there which extends LionButton.
 
-<script type="module">
-  import 'timer-application/clock-timer-component.js';
-</script>
+## clock-timer - component
 
-<clock-timer-component></clock-timer-component>
+In this storybook one clock-timer component is there.
+Based on seconds it will convert in to timer.
 
-<script type="module">
-  import 'timer-application/main-application.js';
-</script>
+## test-application
 
-<main-application></main-application>
-```
+In test-application, using the above 3 components developed one application.
+Here we have on textbox for timer name, one more textbox for time in seconds and one button.
+Whenever we click that button it will display one clock with timer name and time, and this timer contains delete, pause, resume button also.
 
-## Linting with ESLint, Prettier, and Types
-To scan the project for linting errors, run
-```bash
-npm run lint
-```
-
-You can lint with ESLint and Prettier individually as well
-```bash
-npm run lint:eslint
-```
-```bash
-npm run lint:prettier
-```
-
-To automatically fix many linting errors, run
-```bash
-npm run format
-```
-
-You can format using ESLint and Prettier individually as well
-```bash
-npm run format:eslint
-```
-```bash
-npm run format:prettier
-```
-
-## Testing with Karma
-To run the suite of karma tests, run
-```bash
-npm run test
-```
-
-To run the tests in watch mode (for <abbr title="test driven development">TDD</abbr>, for example), run
+## 1 - Install npm
 
 ```bash
-npm run test:watch
+npm install
 ```
 
-## Demoing with Storybook
-To run a local instance of Storybook for your component, run
+## 2 - Run the project
+
 ```bash
 npm run storybook
 ```
 
-To build a production version of Storybook, run
+## 3 - Run the testcases
+
 ```bash
-npm run storybook:build
+npm run test
 ```
+
+
