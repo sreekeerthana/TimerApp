@@ -36,18 +36,16 @@ describe('button click event', () => {
     expect(createTimerStub.calledOnce).to.be.true;
   });
   it('should load timer component when button triggered with Positive Value', async () => {
-    element.shadowRoot.getElementById('timername').serializedValue =
-      'testTimerName';
-    element.shadowRoot.getElementById('timerVal').serializedValue = 120;
+    element.timerName = 'testTimerName';
+    element.timerValue = 120;
     await element.createTimer();
     expect(element.timerObj.timerName).to.be.equal('testTimerName');
     expect(element.shadowRoot.querySelector('clock-timer-component')).to.exist;
   });
 
   it('should not load timer component when button triggered with Negative Value', async () => {
-    element.shadowRoot.getElementById('timername').serializedValue =
-      'testTimerName';
-    element.shadowRoot.getElementById('timerVal').serializedValue = -120;
+    element.timerName = 'testTimerName';
+    element.timerValue = -120;
     await element.createTimer();
     expect(element.timerObj).to.be.empty;
     expect(element.shadowRoot.querySelector('clock-timer-component')).to.not
