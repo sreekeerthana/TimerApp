@@ -1,9 +1,9 @@
 ```js script
 import { html } from '@open-wc/demoing-storybook';
-import '../textbox-component.js';
-import '../button-component.js';
-import '../clock-timer-component.js';
-import '../main-application.js';
+import '../src/TextboxComponent/textbox-component.js';
+import '../src/ButtonComponent/button-component.js';
+import '../src/ClockTimerComponent/clock-timer-component.js';
+import '../src/MainApplication/main-application.js';
 
 export default {
   title: 'TimerApplication',

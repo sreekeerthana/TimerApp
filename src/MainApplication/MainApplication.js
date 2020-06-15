@@ -1,19 +1,15 @@
 import { html, LitElement } from 'lit-element';
 import { MainApplicationStyle } from './MainApplication.style.js';
-import { LionButton } from '@lion/button/src/LionButton.js';
 
 export class MainApplication extends LitElement {
   static get properties() {
     return {
       timerData: { type: Array },
       timerObj: { type: Object },
-      formValue: { type: String },
+      timerValue: { type: String },
       timerName: { type: String },
       counter: { type: String },
     };
-  }
-  static get is() {
-    return 'main-application';
   }
 
   static get styles() {
@@ -28,16 +24,23 @@ export class MainApplication extends LitElement {
   }
 
   createTimer() {
-    this.timerName = this.shadowRoot.getElementById(
-      'timername'
-    ).serializedValue;
-    this.formValue = this.shadowRoot.getElementById('timerVal').serializedValue;
-    if (!(this.formValue < 0)) {
-      this.timerObj = { timerName: this.timerName, timerValue: this.formValue };
+    if (!(this.timerValue < 0)) {
+      this.timerObj = {
+        timerName: this.timerName,
+        timerValue: this.timerValue,
+      };
       this.timerData.push(this.timerObj);
     }
   }
-  
+
+  onChangeTimerName({ currentTarget: { modelValue } }) {
+    this.timerName = modelValue;
+  }
+
+  onChangeTimerValue({ currentTarget: { modelValue } }) {
+    this.timerValue = modelValue;
+  }
+
   render() {
     return html`
       <div class="bgColor">
@@ -45,16 +48,18 @@ export class MainApplication extends LitElement {
           <textbox-component
             placeholder="Enter a timer name"
             name="timername"
-            id="timername"
             class="txtCls"
+            .modelValue="timername"
+            @model-value-changed="${this.onChangeTimerName}"
           >
           </textbox-component>
           <textbox-component
             type="number"
             placeholder="Enter a valid timer time in seconds"
             name="timerval"
-            id="timerVal"
             class="txtCls"
+            .modelValue="timerval"
+            @model-value-changed="${this.onChangeTimerValue}"
           >
           </textbox-component>
           <button-component @click=${this.createTimer} id="createTimerId"

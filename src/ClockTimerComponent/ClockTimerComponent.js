@@ -14,17 +14,12 @@ export class ClockTimerComponent extends LitElement {
     };
   }
 
-  static get is() {
-    return 'clock-timer-component';
-  }
-
   static get styles() {
     return [ClockTimerComponentStyle];
   }
 
   constructor() {
     super();
-    this.timer = this.timer.bind(this);
     this.timerObj = {};
     this.counterObj = [];
     this.timObj = { timerName: '', timerValue: '' };
@@ -59,33 +54,39 @@ export class ClockTimerComponent extends LitElement {
     this.counter = setInterval(this.timer, 1000);
   }
 
-  timer() {
+  timer = () => {
     if (this.timerValue < 0) {
       this.timerRunning = false;
       this.timerObj = { hours: '00', minutes: '00', seconds: '00' };
       return clearInterval(this.counter);
     }
-    var h = Math.floor(this.timerValue / 3600),
-      m = Math.floor(this.timerValue / 60) % 60,
-      s = this.timerValue % 60;
-    if (h < 10) h = '0' + h;
-    if (m < 10) m = '0' + m;
-    if (s < 10) s = '0' + s;
+    let h = Math.floor(this.timerValue / 3600);
+    let m = Math.floor(this.timerValue / 60) % 60;
+    let s = this.timerValue % 60;
+    if (h < 10) h = `0${h}`;
+    if (m < 10) m = `0${m}`;
+    if (s < 10) s = `0${s}`;
     this.timerObj = { hours: h, minutes: m, seconds: s };
-    this.timerValue--;
+    this.timerValue -= 1;
+    return this.timerValue;
+  };
+
+  getDynamicClassDiv() {
+    if (this.pauseBool && this.timerRunning) {
+      return 'resumeCls';
+    }
+    if (!this.pauseBool && this.timerRunning) {
+      return 'pauseCls';
+    }
+    if (this.pauseBool && !this.timerRunning) {
+      return 'deleteCls';
+    }
+    return 'hiddenCls';
   }
 
   render() {
     return html`
-    <div class="wraper ${
-      this.pauseBool && this.timerRunning
-        ? 'resumeCls'
-        : !this.pauseBool && this.timerRunning
-        ? 'pauseCls'
-        : this.pauseBool && this.timerRunning === false
-        ? 'deleteCls'
-        : 'hiddenCls'
-    }" id="wraperId" >
+      <div class="wraper ${this.getDynamicClassDiv()}" id="wraperId" >
                     <div class="title">${this.counterObj.timerName}</div>
                     <div class="timer">${this.timerObj.hours}:${
       this.timerObj.minutes
@@ -106,16 +107,19 @@ export class ClockTimerComponent extends LitElement {
                                         >
                                       </li>
                                     `
-                                  : !this.pauseBool && this.timerRunning
-                                  ? html`<li>
-                                      <a
-                                        @click=${this.resumeTimer}
-                                        class="resumeTimerCls"
-                                        >resume</a
-                                      >
-                                    </li>`
                                   : html``
                               }
+                                  ${
+                                    !this.pauseBool && this.timerRunning
+                                      ? html`<li>
+                                          <a
+                                            @click=${this.resumeTimer}
+                                            class="resumeTimerCls"
+                                            >resume</a
+                                          >
+                                        </li>`
+                                      : html``
+                                  }
                         <ul>
                        <div class="clearfix"></div>
                      </div>

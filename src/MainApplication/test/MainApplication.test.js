@@ -1,5 +1,5 @@
 import { expect, fixture } from '@open-wc/testing';
-import '../main-application';
+import '../main-application.js';
 import sinon from 'sinon';
 
 describe('textbox exists', () => {
@@ -33,21 +33,24 @@ describe('button click event', () => {
   it('should trigger the click event', async () => {
     const createTimerStub = sinon.stub(element, 'createTimer');
     await element.createTimer();
-    expect(createTimerStub.calledOnce).to.be.true
+    expect(createTimerStub.calledOnce).to.be.true;
   });
   it('should load timer component when button triggered with Positive Value', async () => {
-    element.shadowRoot.getElementById('timername').serializedValue = "testTimerName";
+    element.shadowRoot.getElementById('timername').serializedValue =
+      'testTimerName';
     element.shadowRoot.getElementById('timerVal').serializedValue = 120;
     await element.createTimer();
-    expect(element.timerObj.timerName).to.be.equal("testTimerName");
+    expect(element.timerObj.timerName).to.be.equal('testTimerName');
     expect(element.shadowRoot.querySelector('clock-timer-component')).to.exist;
   });
 
   it('should not load timer component when button triggered with Negative Value', async () => {
-    element.shadowRoot.getElementById('timername').serializedValue = "testTimerName";
+    element.shadowRoot.getElementById('timername').serializedValue =
+      'testTimerName';
     element.shadowRoot.getElementById('timerVal').serializedValue = -120;
     await element.createTimer();
     expect(element.timerObj).to.be.empty;
-    expect(element.shadowRoot.querySelector('clock-timer-component')).to.not.exist;
+    expect(element.shadowRoot.querySelector('clock-timer-component')).to.not
+      .exist;
   });
 });
